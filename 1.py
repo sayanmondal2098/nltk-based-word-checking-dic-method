@@ -5,15 +5,15 @@ import sys
 
 from textblob import TextBlob
 from textblob import Word
-from sentencecounter import no_sentences
+from sentencecounter import no_sentences,getline
 
 
 number_of_sentence = print (no_sentences())
 
 
 
-paragraph = "ITP is a two-year graduate program located in the Tisch School of the Arts.  Perhaps the best way to describe us is as a Center for the Recently Possible."
-blob = TextBlob(paragraph)
+# paragraph = "ITP is a two-year graduate program located in the Tisch School of the Arts.  Perhaps the best way to describe us is as a Center for the Recently Possible."
+blob = TextBlob(getline())
 
 
 
@@ -38,7 +38,8 @@ blob = TextBlob(paragraph)
 for i in range(no_sentences()):
     for word in blob.sentences[i].words:
         a = (Word(word)).synsets
-        print ((word) ,a )
+        # print ((word) ,a )
+        print (word)
 #     #  bank = word
 
 # synsets = Word("bank").synsets

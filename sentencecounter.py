@@ -56,8 +56,11 @@ print ("Sentences  : ", sentences)
 def no_sentences():
     return sentences
 
-def getline():
+def gettempwords():
   return (tempwords)
+
+def getline():
+  return(line)
 
 no_sentences()
 

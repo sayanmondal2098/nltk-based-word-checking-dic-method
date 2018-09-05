@@ -3,22 +3,19 @@ from nltk import word_tokenize
 from nltk.corpus import wordnet
 from nltk.corpus import words
 from nltk.tokenize import sent_tokenize, word_tokenize
+from nltk import pos_tag, pos_tag_sents
 
 #import for bag of word
 import numpy as np
 #For the regular expression
 import re
-
-#import for word processing
-import textblob
+#Textblob dependency
 from textblob import TextBlob
-from textblob import Word ,WordList
-# from textblob import wordnet
-
+from textblob import Word
 #set to string 
 from ast import literal_eval
 #From src dependency 
-from sentencecounter import no_sentences,getline
+from sentencecounter import no_sentences,getline,gettempwords 
 
 import os
 def getsysets(word):
@@ -42,7 +39,7 @@ def getsynonyms(word):
             # if l.antonyms():
             #     antonyms.append(l.antonyms()[0].name())
  
-    #print(set(synonyms))
+    # print(set(synonyms))
     return(set(synonyms))
     # print(set(antonyms))
 
@@ -79,8 +76,12 @@ def bagofwords(sentence, words):
 
 def tokenizer(sentences):
     token = word_tokenize(sentences)
+    return token
+    print("#"*100)
     print (sent_tokenize(sentences))
     print (token)
+    print("#"*100)
+
 
 # sentences = "Machine learning is great","Natural Language Processing is a complex field","Natural Language Processing is used in machine learning"
 # vocabulary = tokenize_sentences(sentences)
@@ -90,38 +91,35 @@ def tokenizer(sentences):
 def createposfile(filename,word):
     # filename = input("Enter destination file name in string format :")
     f = open(filename,'w')
-    f.writelines(word)
+    f.writelines(word+'\n')
 
 def createnegfile(filename,word):
     # filename = input("Enter destination file name in string format :")
     f = open(filename,'w')
     f.writelines(word)
 
+def getsortedsynonyms(word):
+    sortedsynonyms = sorted(getsynonyms(word))
+    return sortedsynonyms
 
-def searchword(word, sourcename,destinationfile):
-    if word in open(+sourcename).read():
-            createposfile(destinationfile,word)
-    elif word in open(-sourcename).read():
-            createposfile(destinationfile,word)     
+def getlengthofarray(word):
+    return getsortedsynonyms(word).__len__()
+
+def searchword(word, sourcename):
+    if word in open('list of negative words.txt').read():
+            createnegfile('destinationposfile.txt',word)
+    elif word in open('list of positive words.txt').read():
+            createposfile('destinationnegfile.txt',word)     
 
     else:
-        synonyms = getsynonyms(word)
-        checksynonyms= set(literal_eval(synonyms))
-        searchword(checksynonyms,sourcename,destinationfile)
+        for i in range (0,getlengthofarray(word)):
+            searchword(getsortedsynonyms(word)[i],sourcename)
 
-# getsynonyms("good")
+print ('#'*50)
+searchword('lol','a.txt')
 
-for word in getline():
-    searchword(word,'a.txt','b.txt')
-
-searchword("good","a.txt","bbbbbb.txt")
-def paragraph(sourcefile):
-    f = open(sourcefile,'r')
-    readlines = f.readlines()
-    print (readlines)
-
-
-# searchword('a','a.txt','bb.txt')
-
-
-#for sentence processing
+# tokenizer(sentences)
+# getsynonyms('good')
+# print(sorted(getsynonyms('good'))[2])  #finding an array object [hear it's 3rd object]
+# print ('#'*50)
+# print (getsortedsynonyms('bad').__len__())
