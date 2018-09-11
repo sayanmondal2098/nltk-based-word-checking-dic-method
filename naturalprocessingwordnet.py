@@ -105,21 +105,39 @@ def getsortedsynonyms(word):
 def getlengthofarray(word):
     return getsortedsynonyms(word).__len__()
 
-def searchword(word, sourcename):
+def readposfile():
+    f = open('list of positive words.txt')
+    return f
+
+# def searchword(word, sourcename):
+#     if word in open('list of negative words.txt').read():
+#             createnegfile('destinationposfile.txt',word)
+#     elif word in open('list of positive words.txt').read():
+#             createposfile('destinationnegfile.txt',word)     
+
+#     else:
+#         for i in range (0,getlengthofarray(word)):
+#             searchword(getsortedsynonyms(word)[i],sourcename)
+
+def searchword(word,srcfile):
     if word in open('list of negative words.txt').read():
             createnegfile('destinationposfile.txt',word)
     elif word in open('list of positive words.txt').read():
-            createposfile('destinationnegfile.txt',word)     
-
+            createposfile('destinationnegfile.txt',word)
     else:
-        for i in range (0,getlengthofarray(word)):
-            searchword(getsortedsynonyms(word)[i],sourcename)
+        for i in range(0,getlengthofarray(word)):
+            searchword(sorted(getsynonyms(word))[i],srcfile)
+            f = open(srcfile,'w')
+            f.writelines(word)
 
 print ('#'*50)
-searchword('lol','a.txt')
-
+# searchword('lol','a.txt')
+print(readposfile())
 # tokenizer(sentences)
 # getsynonyms('good')
 # print(sorted(getsynonyms('good'))[2])  #finding an array object [hear it's 3rd object]
-# print ('#'*50)
+print ('#'*50)
 # print (getsortedsynonyms('bad').__len__())
+# createposfile('created.txt','lol')
+# for word in word_tokenize(getline()):
+#     searchword(word,'a.txt')

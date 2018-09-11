@@ -43,8 +43,15 @@ for line in textf:
     
     # word total count
     words += len(tempwords)
-    
-textf.close()
+
+lines = tuple(open(fname, 'r'))
+
+
+with open(fname, "r") as ins:
+    array = []
+    for line in ins:
+      print(array.append(line))
+# textf.close()
 print ('-' * 100)
 # print (tempwords)
 # print ("Lines      : ", lines)
@@ -52,17 +59,22 @@ print ('-' * 100)
 print ("Sentences  : ", sentences)
 # print ("Words      : ", words)
 # optional console wait for keypress
-
+def filename():
+  return fname
 def no_sentences():
     return sentences
 
 def gettempwords():
   return (tempwords)
 
+def getallline():
+  return (lines)
+
 def getline():
   return(line)
 
-no_sentences()
-
-print(getline())
-print ('-' * 100)
+print(no_sentences())
+print ('//' * 100)
+# print(getline())
+print (gettempwords())
+print ('*' * 100)
