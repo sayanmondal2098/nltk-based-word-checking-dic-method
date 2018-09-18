@@ -120,9 +120,9 @@ def readposfile():
 #             searchword(getsortedsynonyms(word)[i],sourcename)
 
 def searchword(word,srcfile):
-    if word in open('list of negative words.txt').read():
-            createnegfile('destinationposfile.txt',word)
-    elif word in open('list of positive words.txt').read():
+    # if word in open('list of negative words.txt').read():
+    #         createnegfile('destinationposfile.txt',word)
+    if word in open('list of positive words.txt').read():
             createposfile('destinationnegfile.txt',word)
     else:
         for i in range(0,getlengthofarray(word)):
@@ -141,3 +141,4 @@ print ('#'*50)
 # createposfile('created.txt','lol')
 # for word in word_tokenize(getline()):
 #     searchword(word,'a.txt')
+
