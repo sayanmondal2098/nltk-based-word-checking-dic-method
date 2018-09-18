@@ -13,6 +13,26 @@ def searchword(word, sourcename):
             createnegfile('destinationnegfile.txt',word)
     elif word in open('list of positive words.txt').read():
             createnegfile('destinationposfile.txt',word)  
+
+
+def searchwordinnegfile(word,sourcename):
+    opennegdictionary = open("list of negative words.txt")
+    readnegline = opennegdictionary.readline()
+    readnegline = readnegline.split()
+    for w in readnegline:
+        if w == word:
+            createnegfile('destinationnegfile.txt',word)
+
+def searchwordinposfile(word,sourcename):
+    openposdictionary = open("list of positive words.txt")
+    readposline = openposdictionary.readline()
+    readposline = readposline.split()
+    for w in readposline:
+        if w == word:
+            createnegfile('destinationposfile.txt',word)
+
+
+
 print (gettempwords())
 print (gettempwords().__format__)
 print (gettempwords().__getitem__)
